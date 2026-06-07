@@ -1,0 +1,123 @@
+version: '3.8'
+
+services:
+  # ----------------------------------------------------
+  # 1. LOAD BALANCER (API GATEWAY)
+  # ----------------------------------------------------
+  load_balancer:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - strukify-web-1
+      - strukify-web-2
+    networks:
+      - strukify_network
+
+  # ----------------------------------------------------
+  # 2. LARAVEL WEB NODES (Frontend + Backend PHP)
+  # ----------------------------------------------------
+  strukify-web-1:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - APP_ENV=production
+      - DB_HOST=mysql-primary
+      - REDIS_HOST=redis-cache
+      - CACHE_STORE=redis
+      - SESSION_DRIVER=redis
+      - QUEUE_CONNECTION=redis
+    depends_on:
+      - mysql-primary
+      - redis-cache
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/up"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - strukify_network
+
+  strukify-web-2:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - APP_ENV=production
+      - DB_HOST=mysql-primary
+      - REDIS_HOST=redis-cache
+      - CACHE_STORE=redis
+      - SESSION_DRIVER=redis
+      - QUEUE_CONNECTION=redis
+    depends_on:
+      - mysql-primary
+      - redis-cache
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/up"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - strukify_network
+
+  # ----------------------------------------------------
+  # 3. AI MICROSERVICE NODES (Python FastAPI)
+  # ----------------------------------------------------
+  strukify-ai-1:
+    build:
+      context: ./ai-service
+    environment:
+      - NODE_ID=ai-worker-1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - strukify_network
+
+  strukify-ai-2:
+    build:
+      context: ./ai-service
+    environment:
+      - NODE_ID=ai-worker-2
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - strukify_network
+
+  # ----------------------------------------------------
+  # 4. REDIS (Distributed Cache, Session, & Queue)
+  # ----------------------------------------------------
+  redis-cache:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - strukify_network
+
+  # ----------------------------------------------------
+  # 5. MYSQL (Database Primary)
+  # ----------------------------------------------------
+  mysql-primary:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: strukify
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - strukify_network
+
+volumes:
+  db_data:
+
+networks:
+  strukify_network:
+    driver: bridge
