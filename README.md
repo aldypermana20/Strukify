@@ -16,9 +16,11 @@
 <br><br>
 
 [![1237050003](https://img.shields.io/badge/003-Aldy%20Permana-blue)](https://github.com/aldypermana20) 
-[![1237050041](https://img.shields.io/badge/041-Andi%20Muchamad%20Mugni%20P-blue)](https://github.com/Andimugni27) 
-[![1237050069](https://img.shields.io/badge/069-Dhaffa%20Zikrullah%20Ramadhan-blue)](https://github.com/dazidhan) 
-[![1237050073](https://img.shields.io/badge/073-Dimas%20Rizqia%20Hidayat-blue)](https://github.com/dimaswae)
+[![1237050041](https://img.shields.io/badge/nim-Aditya%20Nurul%20Pratama-blue)](https://github.com/) 
+[![1237050069](https://img.shields.io/badge/nim-Annisa%20Rasha%20Azaliyya-blue)](https://github.com/) 
+[![1237050073](https://img.shields.io/badge/nim-Andhika%20Pratama%20Kurniawan-blue)](https://github.com/)
+[![1237050073](https://img.shields.io/badge/nim-Aura%20Ghifarani-blue)](https://github.com/)
+[![1237050073](https://img.shields.io/badge/nim-Fauzi%20rizki-blue)](https://github.com/)
 
 <br>
 
