@@ -8,17 +8,17 @@
 **Tim Pengembang Strukify**
 
 <div align='center'>
-<img src="assets/images/Aldy.png" width="100" style="border-radius:50%"/>
-<img src="assets/images/2.png" width="100" style="border-radius:50%"/>
-<img src="assets/images/3.png" width="100" style="border-radius:50%"/>
-<img src="assets/images/4.png" width="100" style="border-radius:50%"/>
+<img src="public/assets/images/Aldy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/assets/images/Andy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/assets/images/Dapoy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/assets/images/Dimas.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
 
-<br>
+<br><br>
 
 [![1237050003](https://img.shields.io/badge/003-Aldy%20Permana-blue)](https://github.com/aldypermana20) 
-[![1237050041](https://img.shields.io/badge/041-Andi%20Muchamad%20Mugni%20P-blue)](https://github.com/2) 
-[![1237050069](https://img.shields.io/badge/069-Dhaffa%20Zikrullah%20Ramadhan-blue)](https://github.com/3) 
-[![1237050073](https://img.shields.io/badge/073-Dimas%20Rizqia%20Hidayat-blue)](https://github.com/4)
+[![1237050041](https://img.shields.io/badge/041-Andi%20Muchamad%20Mugni%20P-blue)](https://github.com/Andimugni27) 
+[![1237050069](https://img.shields.io/badge/069-Dhaffa%20Zikrullah%20Ramadhan-blue)](https://github.com/dazidhan) 
+[![1237050073](https://img.shields.io/badge/073-Dimas%20Rizqia%20Hidayat-blue)](https://github.com/dimaswae)
 
 <br>
 
@@ -144,6 +144,38 @@ pip install -r requirements.txt
 # Jalankan server FastAPI
 python main.py
 ```
+
+---
+
+# 5. Metodologi Pengembangan (SCRUM)
+![Methodology](https://img.shields.io/badge/Method-Agile%20SCRUM-blue)
+
+Proyek ini dikembangkan dengan pendekatan *Agile Development* menggunakan framework **SCRUM**. Pendekatan ini memungkinkan kami untuk mengembangkan fitur secara iteratif, fleksibel terhadap perubahan, dan berfokus pada pengiriman produk yang fungsional di setiap fasenya.
+
+### Peran Tim (Scrum Roles)
+- **Product Owner:** Menentukan kebutuhan sistem dan prioritas backlog.
+- **Scrum Master:** Memfasilitasi proses SCRUM dan menghilangkan hambatan.
+- **Development Team:** Mengembangkan aplikasi (Frontend, Backend, AI).
+
+### Alur Pengembangan (Sprints)
+Pengembangan dibagi menjadi beberapa siklus *Sprint* (durasi 1-2 minggu), di mana setiap Sprint menghasilkan *Increment* atau fitur yang siap digunakan:
+
+* **Sprint 1: Core Foundation & Auth** 
+  - Setup arsitektur aplikasi (Laravel & FastAPI).
+  - Implementasi autentikasi pengguna (Login/Register).
+  - Pembuatan UI/UX dasar dan Dashboard awal.
+* **Sprint 2: AI Microservice & OCR Integration**
+  - Pengembangan model EasyOCR di FastAPI.
+  - Integrasi komunikasi API antara Laravel dan FastAPI.
+  - Fitur upload gambar struk dan ekstraksi teks kasar (*Raw Text*).
+* **Sprint 3: Auto Categorization & Smart Checkout**
+  - Pemrosesan regex untuk menangkap nama item, harga, dan total.
+  - Sistem klasifikasi kategori.
+  - Antarmuka reaktif menggunakan Alpine.js untuk verifikasi hasil scan.
+* **Sprint 4: Reporting & Finalization**
+  - Pembuatan visualisasi data pengeluaran dengan Chart.js.
+  - Ekspor laporan bulanan ke format PDF.
+  - *Bug fixing*, optimasi performa, dan penyusunan dokumentasi/laporan akhir.
 
 ---
 
