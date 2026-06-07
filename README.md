@@ -9,16 +9,16 @@
 
 <div align='center'>
 <img src="assets/images/Aldy.png" width="100" style="border-radius:50%"/>
-<img src="assets/images/Andy.png" width="100" style="border-radius:50%"/>
-<img src="assets/images/Dapoy.png" width="100" style="border-radius:50%"/>
-<img src="assets/images/Dimas.png" width="100" style="border-radius:50%"/>
+<img src="assets/images/2.png" width="100" style="border-radius:50%"/>
+<img src="assets/images/3.png" width="100" style="border-radius:50%"/>
+<img src="assets/images/4.png" width="100" style="border-radius:50%"/>
 
 <br>
 
 [![1237050003](https://img.shields.io/badge/003-Aldy%20Permana-blue)](https://github.com/aldypermana20) 
-[![1237050041](https://img.shields.io/badge/041-Andi%20Muchamad%20Mugni%20P-blue)](https://github.com/Andimugni27) 
-[![1237050069](https://img.shields.io/badge/069-Dhaffa%20Zikrullah%20Ramadhan-blue)](https://github.com/dazidhan) 
-[![1237050073](https://img.shields.io/badge/073-Dimas%20Rizqia%20Hidayat-blue)](https://github.com/dimaswae)
+[![1237050041](https://img.shields.io/badge/041-Andi%20Muchamad%20Mugni%20P-blue)](https://github.com/2) 
+[![1237050069](https://img.shields.io/badge/069-Dhaffa%20Zikrullah%20Ramadhan-blue)](https://github.com/3) 
+[![1237050073](https://img.shields.io/badge/073-Dimas%20Rizqia%20Hidayat-blue)](https://github.com/4)
 
 <br>
 
