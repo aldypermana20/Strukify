@@ -9,9 +9,9 @@
 
 <div align='center'>
 <img src="public/images/aldy.jpg" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
-<img src="public/assets/images/Andy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
-<img src="public/assets/images/Dapoy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
-<img src="public/assets/images/Dimas.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/images/Screenshot 2026-06-02 174210.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/images/Screenshot 2026-06-02 174156.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/images/Screenshot 2026-06-02 174119.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
 
 <br><br>
 
