@@ -8,7 +8,7 @@
 **Tim Pengembang Strukify**
 
 <div align='center'>
-<img src="public/assets/images/Aldy.jpg" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/assets/images/aldy.jpg" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
 <img src="public/assets/images/Andy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
 <img src="public/assets/images/Dapoy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
 <img src="public/assets/images/Dimas.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
