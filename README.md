@@ -150,27 +150,21 @@ python main.py
 ---
 # 6. Bukti Testing (Testing Evidence)
 ![Testing](https://img.shields.io/badge/Testing-Evidence-purple)
-Bagian ini berisi dokumentasi hasil pengujian sistem (Unit Testing, Integration Testing, atau User Acceptance Testing).
-### Skenario Uji 1: [Nama Skenario Uji]
-- **Tujuan:** [Deskripsi tujuan pengujian]
-- **Langkah-langkah:**
-  1. [Langkah 1]
-  2. [Langkah 2]
-- **Hasil yang Diharapkan:** [Ekspektasi hasil]
-- **Hasil Aktual:** [Hasil yang sebenarnya terjadi]
-- **Status:** ✅ Pass / ❌ Fail
-*Tambahkan screenshot bukti di bawah ini:*
-<!-- <img src="path/to/screenshot1.png" width="400"> -->
-### Skenario Uji 2: [Nama Skenario Uji]
-- **Tujuan:** [Deskripsi tujuan pengujian]
-- **Langkah-langkah:**
-  1. [Langkah 1]
-  2. [Langkah 2]
-- **Hasil yang Diharapkan:** [Ekspektasi hasil]
-- **Hasil Aktual:** [Hasil yang sebenarnya terjadi]
-- **Status:** ✅ Pass / ❌ Fail
-*Tambahkan screenshot bukti di bawah ini:*
-<!-- <img src="path/to/screenshot2.png" width="400"> -->
+
+Bagian ini berisi dokumentasi hasil pengujian sistem beserta bukti *screenshot*-nya.
+
+| No | Fitur / Skenario Pengujian | Hasil yang Diharapkan | Status | Bukti Screenshot |
+|---|---|---|:---:|---|
+| 1 | [Nama Skenario Uji 1] | [Ekspektasi hasil 1] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot1.png" width="200"> |
+| 2 | [Nama Skenario Uji 2] | [Ekspektasi hasil 2] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot2.png" width="200"> |
+| 3 | [Nama Skenario Uji 3] | [Ekspektasi hasil 3] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot3.png" width="200"> |
+| 4 | [Nama Skenario Uji 4] | [Ekspektasi hasil 4] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot4.png" width="200"> |
+| 5 | [Nama Skenario Uji 5] | [Ekspektasi hasil 5] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot5.png" width="200"> |
+| 6 | [Nama Skenario Uji 6] | [Ekspektasi hasil 6] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot6.png" width="200"> |
+| 7 | [Nama Skenario Uji 7] | [Ekspektasi hasil 7] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot7.png" width="200"> |
+| 8 | [Nama Skenario Uji 8] | [Ekspektasi hasil 8] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot8.png" width="200"> |
+| 9 | [Nama Skenario Uji 9] | [Ekspektasi hasil 9] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot9.png" width="200"> |
+| 10 | [Nama Skenario Uji 10] | [Ekspektasi hasil 10] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot10.png" width="200"> |
 ---
 <div align='center'>
 <small>Made with ❤️ by Team Strukify | UIN Sunan Gunung Djati Bandung</small>
