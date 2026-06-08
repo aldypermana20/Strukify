@@ -155,8 +155,6 @@ Bagian ini berisi dokumentasi hasil pengujian sistem beserta bukti *screenshot*-
 
 | No | Fitur / Skenario Pengujian | Hasil yang Diharapkan | Status | Bukti Screenshot |
 |---|---|---|:---:|---|
-| No | Fitur / Skenario Pengujian | Hasil yang Diharapkan | Status | Bukti Screenshot |
-|---|---|---|:---:|---|
 | 1 | Landing Page | Halaman utama berhasil dimuat dengan baik dan menampilkan informasi aplikasi secara responsif. | ✅ Pass | <img src="public/images/Landing Page.png" width="200"> |
 | 2 | Register | Pengguna baru berhasil mendaftar akun dengan data yang valid dan diarahkan ke halaman login. | ✅ Pass | <img src="public/images/Register.png" width="200"> |
 | 3 | Login | Pengguna berhasil masuk ke sistem dengan kredensial yang valid dan diarahkan ke halaman Dashboard. | ✅ Pass | <img src="public/images/Login.png" width="200"> |
