@@ -155,17 +155,19 @@ Bagian ini berisi dokumentasi hasil pengujian sistem beserta bukti *screenshot*-
 
 | No | Fitur / Skenario Pengujian | Hasil yang Diharapkan | Status | Bukti Screenshot |
 |---|---|---|:---:|---|
-| 1 | [Landing Page] | [Ekspektasi hasil 1] | ? | <img src="public/images/Landing Page.png" width="200"> |
-| 2 | [Register] | [Ekspektasi hasil 2] | ? Pass | <img src="public/images/Register.png" width="200"> |
-| 3 | [Login] | [Ekspektasi hasil 3] | ? | <img src="public/images/Login.png" width="200"> |
-| 4 | [Dashboard] | [Ekspektasi hasil 4] | ? | <img src="public/images/Dashboard.png" width="200"> |
-| 5 | [Scan Struk] | [Ekspektasi hasil 5] | ? | <img src="public/images/Scan Struk.png" width="200"> |
-| 6 | [Ai Proses] | [Ekspektasi hasil 6] | ? | <img src="public/images/Ai Proses.png" width="200"> |
-| 7 | [Riwayat Struk 1] | [Ekspektasi hasil 7] | ? | <img src="public/images/Riwayat Struk.png" width="200"> |
-| 8 | [Riwayat Struk 2] | [Ekspektasi hasil 8] | ? | <img src="public/images/Riwayat Struk 2.png" width="200"> |
-| 9 | [Riwayat Struk 3] | [Ekspektasi hasil 9] | ? | <img src="public/images/Riwayat Struk 3.png" width="200"> |
-| 10 | [Simpan Struk] | [Ekspektasi hasil 10] | ? | <img src="public/images/Simpan Struk.png" width="200"> |
-| 11 | [Laporan] | [Ekspektasi hasil 10] | ? | <img src="public/images/Laporan.png" width="200"> |
+| No | Fitur / Skenario Pengujian | Hasil yang Diharapkan | Status | Bukti Screenshot |
+|---|---|---|:---:|---|
+| 1 | Landing Page | Halaman utama berhasil dimuat dengan baik dan menampilkan informasi aplikasi secara responsif. | ✅ Pass | <img src="public/images/Landing Page.png" width="200"> |
+| 2 | Register | Pengguna baru berhasil mendaftar akun dengan data yang valid dan diarahkan ke halaman login. | ✅ Pass | <img src="public/images/Register.png" width="200"> |
+| 3 | Login | Pengguna berhasil masuk ke sistem dengan kredensial yang valid dan diarahkan ke halaman Dashboard. | ✅ Pass | <img src="public/images/Login.png" width="200"> |
+| 4 | Dashboard | Menampilkan ringkasan data pengeluaran dan grafik analitik secara akurat berdasarkan data akun. | ✅ Pass | <img src="public/images/Dashboard.png" width="200"> |
+| 5 | Scan Struk | Sistem berhasil menerima unggahan foto struk pengguna dan menampilkannya dengan baik. | ✅ Pass | <img src="public/images/Scan Struk.png" width="200"> |
+| 6 | Ai Proses | Model AI berhasil mengekstrak teks, mendeteksi item/harga, dan mengkategorikannya secara otomatis. | ✅ Pass | <img src="public/images/Ai Proses.png" width="200"> |
+| 7 | Riwayat Struk 1 | Menampilkan daftar riwayat struk yang telah dipindai secara berurutan beserta tanggal dan totalnya. | ✅ Pass | <img src="public/images/Riwayat Struk.png" width="200"> |
+| 8 | Riwayat Struk 2 | Menampilkan detail lengkap (item, harga, kategori) dari salah satu struk belanja yang tersimpan. | ✅ Pass | <img src="public/images/Riwayat Struk 2.png" width="200"> |
+| 9 | Riwayat Struk 3 | Fungsionalitas manajemen riwayat struk (misal: pencarian, filter, atau hapus) berjalan dengan lancar. | ✅ Pass | <img src="public/images/Riwayat Struk 3.png" width="200"> |
+| 10 | Simpan Struk | Data struk belanja yang telah di-*review* berhasil disimpan secara permanen ke dalam database. | ✅ Pass | <img src="public/images/Simpan Struk.png" width="200"> |
+| 11 | Laporan | Sistem berhasil merangkum total pengeluaran dan menampilkannya sebagai laporan/rekapitulasi yang valid. | ✅ Pass | <img src="public/images/Laporan.png" width="200"> |
 ---
 <div align='center'>
 <small>Made with ❤️ by Team Strukify | UIN Sunan Gunung Djati Bandung</small>
