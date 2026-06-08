@@ -148,39 +148,30 @@ python main.py
 ```
 
 ---
-
-# 5. Metodologi Pengembangan (SCRUM)
-![Methodology](https://img.shields.io/badge/Method-Agile%20SCRUM-blue)
-
-Proyek ini dikembangkan dengan pendekatan *Agile Development* menggunakan framework **SCRUM**. Pendekatan ini memungkinkan kami untuk mengembangkan fitur secara iteratif, fleksibel terhadap perubahan, dan berfokus pada pengiriman produk yang fungsional di setiap fasenya.
-
-### Peran Tim (Scrum Roles)
-- **Product Owner:** Menentukan kebutuhan sistem dan prioritas backlog.
-- **Scrum Master:** Memfasilitasi proses SCRUM dan menghilangkan hambatan.
-- **Development Team:** Mengembangkan aplikasi (Frontend, Backend, AI).
-
-### Alur Pengembangan (Sprints)
-Pengembangan dibagi menjadi beberapa siklus *Sprint* (durasi 1-2 minggu), di mana setiap Sprint menghasilkan *Increment* atau fitur yang siap digunakan:
-
-* **Sprint 1: Core Foundation & Auth** 
-  - Setup arsitektur aplikasi (Laravel & FastAPI).
-  - Implementasi autentikasi pengguna (Login/Register).
-  - Pembuatan UI/UX dasar dan Dashboard awal.
-* **Sprint 2: AI Microservice & OCR Integration**
-  - Pengembangan model EasyOCR di FastAPI.
-  - Integrasi komunikasi API antara Laravel dan FastAPI.
-  - Fitur upload gambar struk dan ekstraksi teks kasar (*Raw Text*).
-* **Sprint 3: Auto Categorization & Smart Checkout**
-  - Pemrosesan regex untuk menangkap nama item, harga, dan total.
-  - Sistem klasifikasi kategori.
-  - Antarmuka reaktif menggunakan Alpine.js untuk verifikasi hasil scan.
-* **Sprint 4: Reporting & Finalization**
-  - Pembuatan visualisasi data pengeluaran dengan Chart.js.
-  - Ekspor laporan bulanan ke format PDF.
-  - *Bug fixing*, optimasi performa, dan penyusunan dokumentasi/laporan akhir.
-
+# 6. Bukti Testing (Testing Evidence)
+![Testing](https://img.shields.io/badge/Testing-Evidence-purple)
+Bagian ini berisi dokumentasi hasil pengujian sistem (Unit Testing, Integration Testing, atau User Acceptance Testing).
+### Skenario Uji 1: [Nama Skenario Uji]
+- **Tujuan:** [Deskripsi tujuan pengujian]
+- **Langkah-langkah:**
+  1. [Langkah 1]
+  2. [Langkah 2]
+- **Hasil yang Diharapkan:** [Ekspektasi hasil]
+- **Hasil Aktual:** [Hasil yang sebenarnya terjadi]
+- **Status:** ✅ Pass / ❌ Fail
+*Tambahkan screenshot bukti di bawah ini:*
+<!-- <img src="path/to/screenshot1.png" width="400"> -->
+### Skenario Uji 2: [Nama Skenario Uji]
+- **Tujuan:** [Deskripsi tujuan pengujian]
+- **Langkah-langkah:**
+  1. [Langkah 1]
+  2. [Langkah 2]
+- **Hasil yang Diharapkan:** [Ekspektasi hasil]
+- **Hasil Aktual:** [Hasil yang sebenarnya terjadi]
+- **Status:** ✅ Pass / ❌ Fail
+*Tambahkan screenshot bukti di bawah ini:*
+<!-- <img src="path/to/screenshot2.png" width="400"> -->
 ---
-
 <div align='center'>
 <small>Made with ❤️ by Team Strukify | UIN Sunan Gunung Djati Bandung</small>
 </div>
