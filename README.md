@@ -155,16 +155,17 @@ Bagian ini berisi dokumentasi hasil pengujian sistem beserta bukti *screenshot*-
 
 | No | Fitur / Skenario Pengujian | Hasil yang Diharapkan | Status | Bukti Screenshot |
 |---|---|---|:---:|---|
-| 1 | [Nama Skenario Uji 1] | [Ekspektasi hasil 1] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot1.png" width="200"> |
-| 2 | [Nama Skenario Uji 2] | [Ekspektasi hasil 2] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot2.png" width="200"> |
-| 3 | [Nama Skenario Uji 3] | [Ekspektasi hasil 3] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot3.png" width="200"> |
-| 4 | [Nama Skenario Uji 4] | [Ekspektasi hasil 4] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot4.png" width="200"> |
-| 5 | [Nama Skenario Uji 5] | [Ekspektasi hasil 5] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot5.png" width="200"> |
-| 6 | [Nama Skenario Uji 6] | [Ekspektasi hasil 6] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot6.png" width="200"> |
-| 7 | [Nama Skenario Uji 7] | [Ekspektasi hasil 7] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot7.png" width="200"> |
-| 8 | [Nama Skenario Uji 8] | [Ekspektasi hasil 8] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot8.png" width="200"> |
-| 9 | [Nama Skenario Uji 9] | [Ekspektasi hasil 9] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot9.png" width="200"> |
-| 10 | [Nama Skenario Uji 10] | [Ekspektasi hasil 10] | ✅ Pass / ❌ Fail | <img src="path/to/screenshot10.png" width="200"> |
+| 1 | [Landing Page] | [Ekspektasi hasil 1] | ? | <img src="public/images/Landing Page.png" width="200"> |
+| 2 | [Register] | [Ekspektasi hasil 2] | ? Pass | <img src="public/images/Register.png" width="200"> |
+| 3 | [Login] | [Ekspektasi hasil 3] | ? | <img src="public/images/Login.png" width="200"> |
+| 4 | [Dashboard] | [Ekspektasi hasil 4] | ? | <img src="public/images/Dashboard.png" width="200"> |
+| 5 | [Scan Struk] | [Ekspektasi hasil 5] | ? | <img src="public/images/Scan Struk.png" width="200"> |
+| 6 | [Ai Proses] | [Ekspektasi hasil 6] | ? | <img src="public/images/Ai Proses.png" width="200"> |
+| 7 | [Riwayat Struk 1] | [Ekspektasi hasil 7] | ? | <img src="public/images/Riwayat Struk.png" width="200"> |
+| 8 | [Riwayat Struk 2] | [Ekspektasi hasil 8] | ? | <img src="public/images/Riwayat Struk 2.png" width="200"> |
+| 9 | [Riwayat Struk 3] | [Ekspektasi hasil 9] | ? | <img src="public/images/Riwayat Struk 3.png" width="200"> |
+| 10 | [Simpan Struk] | [Ekspektasi hasil 10] | ? | <img src="public/images/Simpan Struk.png" width="200"> |
+| 11 | [Laporan] | [Ekspektasi hasil 10] | ? | <img src="public/images/Laporan.png" width="200"> |
 ---
 <div align='center'>
 <small>Made with ❤️ by Team Strukify | UIN Sunan Gunung Djati Bandung</small>
