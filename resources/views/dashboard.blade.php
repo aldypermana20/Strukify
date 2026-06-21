@@ -74,42 +74,48 @@
                     <div class="text-sm text-gray-400 relative z-10">Struk Tersimpan</div>
                 </div>
 
-                <!-- Kategori Teratas -->
+                <!-- Rata-rata Transaksi -->
                 <div class="glass rounded-2xl p-6 relative overflow-hidden group hover:border-cyan-500/30 transition-colors">
                     <div class="absolute top-0 right-0 w-24 h-24 bg-cyan-500/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
                     <div class="flex items-center justify-between mb-4 relative z-10">
                         <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20">
-                            <svg class="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+                            <svg class="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         </div>
                         <span class="text-xs font-medium text-cyan-400/80 bg-cyan-500/10 px-2.5 py-1 rounded-full uppercase tracking-wider">{{ $period === 'today' ? 'Hari Ini' : ($period === 'year' ? 'Tahun Ini' : 'Bulan Ini') }}</span>
                     </div>
-                    <div class="text-2xl font-bold font-display text-white relative z-10 mb-1 truncate" title="{{ $topCategory }}">
-                        {{ $topCategory }}
+                    <div class="text-3xl font-bold font-display text-white relative z-10 mb-1">
+                        Rp {{ number_format($avgSpending, 0, ',', '.') }}
                     </div>
-                    <div class="text-sm text-gray-400 relative z-10">Pengeluaran Terbesar</div>
+                    <div class="text-sm text-gray-400 relative z-10">Rata-rata per Struk</div>
                 </div>
             </div>
 
             <!-- Main Content Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Chart Area -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <!-- Trend Chart Area -->
                 <div class="lg:col-span-2 glass rounded-2xl p-6 flex flex-col">
                     <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-lg font-semibold text-white">Analisis Kategori</h3>
-                        <span class="text-xs text-gray-400">Distribusi Pengeluaran</span>
+                        <h3 class="text-lg font-semibold text-white">Tren Pengeluaran</h3>
+                        <span class="text-xs text-gray-400">{{ $period === 'today' ? '7 Hari Terakhir' : ($period === 'year' ? 'Per Bulan' : 'Bulan Ini') }}</span>
                     </div>
                     
-                    @if(count($chartData) > 0)
-                        <div class="flex-1 w-full h-[300px] relative flex items-center justify-center">
-                            <canvas id="categoryChart"></canvas>
+                    @if(count($trendData) > 0 && array_sum($trendData) > 0)
+                        <div class="flex-1 w-full h-[300px] relative" x-data="{ loaded: false }" x-init="setTimeout(() => loaded = true, 500)">
+                            <!-- Skeleton Loading -->
+                            <div x-show="!loaded" class="absolute inset-0 flex items-end gap-2 px-8 pb-8">
+                                @for($i = 0; $i < 12; $i++)
+                                    <div class="flex-1 bg-white/5 rounded-t animate-pulse" style="height: {{ rand(20, 80) }}%"></div>
+                                @endfor
+                            </div>
+                            <canvas id="trendChart" x-show="loaded" x-transition></canvas>
                         </div>
                     @else
-                        <div class="flex-1 flex flex-col items-center justify-center text-center p-8">
-                            <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-4">
-                                <svg class="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"/><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"/></svg>
+                        <div class="flex-1 flex flex-col items-center justify-center text-center p-8 h-[300px]">
+                            <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-3">
+                                <svg class="w-7 h-7 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75z"/></svg>
                             </div>
-                            <h4 class="text-white font-medium mb-1">Belum Ada Data</h4>
-                            <p class="text-sm text-gray-400 max-w-xs">Grafik pengeluaran akan muncul setelah Anda menyimpan struk bulan ini.</p>
+                            <h4 class="text-white font-medium mb-1">Belum Ada Data Tren</h4>
+                            <p class="text-sm text-gray-400 max-w-xs">Grafik tren akan muncul setelah Anda menyimpan struk.</p>
                         </div>
                     @endif
                 </div>
@@ -160,69 +166,67 @@
         </div>
     </div>
 
-    @if(count($chartData) > 0)
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('categoryChart').getContext('2d');
-            
-            // Chart.js global defaults for dark theme
-            Chart.defaults.color = '#9ca3af';
-            Chart.defaults.font.family = "'Inter', sans-serif";
-            
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: @json($chartLabels),
-                    datasets: [{
-                        data: @json($chartData),
-                        backgroundColor: @json($chartColors),
-                        borderWidth: 2,
-                        borderColor: '#111827', // Match dark background
-                        hoverOffset: 10
-                    }]
+    document.addEventListener('DOMContentLoaded', function() {
+        Chart.defaults.color = '#9ca3af';
+        Chart.defaults.font.family = "'Inter', sans-serif";
+
+        // Trend Line Chart
+        @if(count($trendData) > 0 && array_sum($trendData) > 0)
+        const trendCtx = document.getElementById('trendChart').getContext('2d');
+        const gradient = trendCtx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, 'rgba(0, 191, 165, 0.3)');
+        gradient.addColorStop(1, 'rgba(0, 191, 165, 0.0)');
+
+        new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: @json($trendLabels),
+                datasets: [{
+                    label: 'Pengeluaran',
+                    data: @json($trendData),
+                    borderColor: '#00bfa5',
+                    backgroundColor: gradient,
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#00bfa5',
+                    pointBorderColor: '#111827',
+                    pointBorderWidth: 2,
+                    pointRadius: 3,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(17, 24, 39, 0.95)',
+                        titleColor: '#fff', bodyColor: '#fff',
+                        padding: 12, borderColor: 'rgba(255,255,255,0.1)',
+                        borderWidth: 1, cornerRadius: 8,
+                        callbacks: {
+                            label: ctx => 'Rp ' + new Intl.NumberFormat('id-ID').format(ctx.parsed.y)
+                        }
+                    }
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '70%',
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            labels: {
-                                padding: 20,
-                                usePointStyle: true,
-                                pointStyle: 'circle',
-                                font: {
-                                    size: 12,
-                                    weight: '500'
-                                }
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(17, 24, 39, 0.9)',
-                            titleColor: '#fff',
-                            bodyColor: '#fff',
-                            padding: 12,
-                            borderColor: 'rgba(255,255,255,0.1)',
-                            borderWidth: 1,
-                            cornerRadius: 8,
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed !== null) {
-                                        label += 'Rp ' + new Intl.NumberFormat('id-ID').format(context.parsed);
-                                    }
-                                    return label;
-                                }
-                            }
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { maxTicksLimit: 12 }
+                    },
+                    y: {
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: {
+                            callback: v => 'Rp ' + new Intl.NumberFormat('id-ID').format(v)
                         }
                     }
                 }
-            });
+            }
         });
+        @endif
+    });
     </script>
-    @endif
 </x-app-layout>

@@ -18,10 +18,12 @@ Route::middleware('auth')->group(function () {
     
     // Manual Receipts
     Route::resource('receipts', App\Http\Controllers\ReceiptController::class);
+    Route::patch('/receipts/{receipt}/confirm', [App\Http\Controllers\ReceiptController::class, 'confirm'])->name('receipts.confirm');
     
     // Reports & Export
     Route::get('/reports', [App\Http\Controllers\ReportController::class, 'index'])->name('reports.index');
     Route::get('/receipts/export/pdf', [App\Http\Controllers\ExportController::class, 'exportPdf'])->name('receipts.export.pdf');
+    Route::get('/receipts/{receipt}/export/pdf', [App\Http\Controllers\ExportController::class, 'exportSinglePdf'])->name('receipts.export-single.pdf');
     
     // AI Scan routes
     Route::get('/scan', [App\Http\Controllers\ReceiptScanController::class, 'index'])->name('scan.index');

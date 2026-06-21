@@ -1,5 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
+        <x-breadcrumb :items="[
+            ['label' => 'Dashboard', 'url' => route('dashboard')],
+            ['label' => 'Riwayat Struk', 'url' => route('receipts.index')],
+            ['label' => 'Detail Struk'],
+        ]" />
         <div class="flex items-center gap-4">
             <a href="{{ route('receipts.index') }}" class="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-xl transition-all">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
@@ -30,6 +35,10 @@
                             <p class="font-medium text-white">{{ $receipt->store_name ?: 'Tidak diketahui' }}</p>
                         </div>
                         <div class="mb-4">
+                            <p class="text-xs text-gray-500 mb-1">Alamat</p>
+                            <p class="font-medium text-white text-sm break-words">{{ $receipt->address ?: 'Tidak ada alamat' }}</p>
+                        </div>
+                        <div class="mb-4">
                             <p class="text-xs text-gray-500 mb-1">Tanggal</p>
                             <p class="font-medium text-white">{{ $receipt->receipt_date->format('d F Y') }}</p>
                         </div>
@@ -40,6 +49,20 @@
                     </div>
 
                     <div class="glass rounded-2xl p-6 flex flex-col gap-3">
+                        @if($receipt->status === 'review_needed' || $receipt->status === 'review')
+                            <form action="{{ route('receipts.confirm', $receipt) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="w-full px-4 py-2.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded-xl text-sm font-medium transition-colors border border-emerald-500/20">
+                                    Simpan Struk
+                                </button>
+                            </form>
+                        @else
+                            <a href="{{ route('receipts.export-single.pdf', $receipt) }}" target="_blank" class="w-full text-center px-4 py-2.5 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/20 rounded-xl text-sm font-medium transition-colors flex justify-center items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                                Cetak PDF
+                            </a>
+                        @endif
                         <a href="{{ route('receipts.edit', $receipt) }}" class="w-full text-center px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-sm font-medium transition-colors">
                             Edit Struk
                         </a>
@@ -53,37 +76,71 @@
                     </div>
                 </div>
 
-                <!-- Receipt Items -->
+                <!-- Items List -->
                 <div class="md:col-span-2">
                     <div class="glass rounded-2xl p-6">
-                        <h3 class="text-sm font-semibold text-gray-400 mb-6 uppercase tracking-wider">Daftar Barang ({{ $receipt->items->count() }})</h3>
-                        
-                        <div class="space-y-4">
-                            @foreach($receipt->items as $item)
-                                <div class="flex items-start justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
-                                    <div class="flex items-start gap-4">
-                                        <div class="w-10 h-10 rounded-lg bg-{{ $item->category ? $item->category->color : 'gray' }}-500/10 flex items-center justify-center text-lg shrink-0">
-                                            {{ $item->category ? $item->category->icon : '🏷️' }}
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-white mb-1">{{ $item->item_name }}</p>
-                                            <div class="flex items-center gap-3 text-xs text-gray-400">
-                                                <span>{{ $item->quantity }}x @ Rp {{ number_format($item->price, 0, ',', '.') }}</span>
-                                                <span class="w-1 h-1 rounded-full bg-gray-600"></span>
-                                                <span class="text-{{ $item->category ? $item->category->color : 'gray' }}-400">{{ $item->category ? $item->category->name : 'Tanpa Kategori' }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="font-semibold text-white">
-                                        Rp {{ number_format($item->quantity * $item->price, 0, ',', '.') }}
-                                    </div>
-                                </div>
-                            @endforeach
+                        <div class="flex items-center justify-between mb-5">
+                            <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Daftar Barang</h3>
+                            @if($receipt->items->count() > 0)
+                                <span class="text-xs text-gray-500 bg-white/5 px-2.5 py-1 rounded-full border border-white/10">{{ $receipt->items->count() }} item</span>
+                            @endif
                         </div>
+
+                        @if($receipt->items->count() > 0)
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                    <thead>
+                                        <tr class="border-b border-white/10">
+                                            <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider pb-3 pr-4">Nama Barang</th>
+                                            <th class="text-center text-xs font-semibold text-gray-500 uppercase tracking-wider pb-3 px-4 w-16">Qty</th>
+                                            <th class="text-right text-xs font-semibold text-gray-500 uppercase tracking-wider pb-3 pl-4">Harga (Net)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-white/5">
+                                        @foreach($receipt->items as $item)
+                                            <tr class="hover:bg-white/5 transition-colors">
+                                                <td class="py-3 pr-4 text-white font-medium">{{ $item->item_name }}</td>
+                                                <td class="py-3 px-4 text-center text-gray-400">{{ $item->quantity }}</td>
+                                                <td class="py-3 pl-4 text-right text-primary-400 font-semibold tabular-nums">
+                                                    Rp {{ number_format($item->price, 0, ',', '.') }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="border-t border-white/20">
+                                            <td colspan="2" class="pt-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Total dari Barang</td>
+                                            <td class="pt-4 text-right text-white font-bold tabular-nums">
+                                                Rp {{ number_format($receipt->items->sum(fn($i) => $i->price * $i->quantity), 0, ',', '.') }}
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        @elseif($receipt->status === 'processing')
+                            <div class="py-10 flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 text-primary-400 animate-spin mb-3" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                                </svg>
+                                <p class="text-sm text-gray-400 font-medium">AI sedang memproses struk...</p>
+                                <p class="text-xs text-gray-600 mt-1">Daftar barang akan muncul setelah selesai.</p>
+                            </div>
+                        @else
+                            <div class="py-10 flex flex-col items-center justify-center text-center border border-dashed border-white/10 rounded-xl bg-white/5">
+                                <svg class="w-8 h-8 text-gray-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                </svg>
+                                <p class="text-sm text-gray-500">Tidak ada barang terdeteksi.</p>
+                                <p class="text-xs text-gray-600 mt-1">Struk lama mungkin belum memiliki data barang.</p>
+                            </div>
+                        @endif
                     </div>
                 </div>
+
             </div>
 
         </div>
     </div>
 </x-app-layout>
+

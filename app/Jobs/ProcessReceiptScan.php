@@ -52,21 +52,31 @@ class ProcessReceiptScan implements ShouldQueue
 
             // Update receipt with AI extracted data
             $this->receipt->update([
-                'store_name' => $aiData['store_name'] ?? 'Unknown Store',
+                'store_name'   => $aiData['store_name'] ?? 'Unknown Store',
+                'address'      => $aiData['address'] ?? null,
                 'receipt_date' => !empty($aiData['receipt_date']) ? $aiData['receipt_date'] : now(),
-                'total' => $aiData['total'] ?? 0,
-                'status' => 'review_needed' // Needs review by user
+                'total'        => $aiData['total'] ?? 0,
+                'status'       => 'review_needed' // Needs review by user
             ]);
 
-            // Save items if any exist
-            if (isset($aiData['items']) && is_array($aiData['items'])) {
-                foreach ($aiData['items'] as $item) {
-                    $this->receipt->items()->create([
-                        'item_name' => $item['item_name'] ?? 'Unknown Item',
-                        'price' => $item['price'] ?? 0,
-                        'quantity' => $item['quantity'] ?? 1,
-                        'category_id' => $item['category_id'] ?? 7 // 7 is Lainnya as fallback
-                    ]);
+            // Save extracted items to receipt_items table
+            $items = $aiData['items'] ?? [];
+            if (!empty($items) && is_array($items)) {
+                // Delete old items first (in case job is retried)
+                $this->receipt->items()->delete();
+
+                $itemsToInsert = collect($items)
+                    ->filter(fn($item) => !empty($item['item_name']))
+                    ->map(fn($item) => [
+                        'item_name'   => $item['item_name'],
+                        'quantity'    => (int) ($item['quantity'] ?? 1),
+                        'price'       => (float) ($item['price'] ?? 0),
+                        'category_id' => null, // User can assign category later
+                    ])
+                    ->toArray();
+
+                if (!empty($itemsToInsert)) {
+                    $this->receipt->items()->createMany($itemsToInsert);
                 }
             }
 

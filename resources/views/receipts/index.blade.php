@@ -1,11 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
+        <x-breadcrumb :items="[
+            ['label' => 'Dashboard', 'url' => route('dashboard')],
+            ['label' => 'Riwayat Struk'],
+        ]" />
         <div class="flex items-center justify-between">
             <h2 class="text-xl font-bold font-display text-white">
                 Riwayat Struk
             </h2>
             <div class="flex items-center gap-3">
-                <a href="{{ route('receipts.export.pdf') }}" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-xl font-medium text-sm text-white hover:bg-white/10 transition-all flex items-center gap-2">
+                <a href="{{ route('receipts.export.pdf', request()->query()) }}" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-xl font-medium text-sm text-white hover:bg-white/10 transition-all flex items-center gap-2">
                     <svg class="w-4 h-4 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                     Download PDF
                 </a>
@@ -19,14 +23,47 @@
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
-            @if (session('success'))
-                <div class="mb-6 px-4 py-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl flex items-center gap-3">
-                    <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    <p class="text-sm font-medium">{{ session('success') }}</p>
-                </div>
-            @endif
 
+            <!-- Search & Filter Bar -->
+            <div class="glass rounded-2xl p-5 mb-6">
+                <form action="{{ route('receipts.index') }}" method="GET" class="flex flex-col md:flex-row md:items-end gap-4">
+                    <div class="flex-1">
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Cari Toko</label>
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Nama toko..." class="w-full pl-10 pr-3 py-2 bg-surface-900 border border-white/10 rounded-lg text-white text-sm focus:border-primary-500 focus:ring-1 focus:outline-none placeholder-gray-500">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-40">
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Status</label>
+                        <select name="status" class="w-full px-3 py-2 bg-surface-900 border border-white/10 rounded-lg text-white text-sm focus:border-primary-500 focus:ring-1 focus:outline-none">
+                            <option value="" class="text-gray-900">Semua Status</option>
+                            <option value="saved" {{ request('status') === 'saved' ? 'selected' : '' }} class="text-gray-900">Disimpan</option>
+                            <option value="review_needed" {{ request('status') === 'review_needed' ? 'selected' : '' }} class="text-gray-900">Perlu Review</option>
+                            <option value="processing" {{ request('status') === 'processing' ? 'selected' : '' }} class="text-gray-900">Memproses AI</option>
+                        </select>
+                    </div>
+                    <div class="w-full md:w-40">
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Dari Tanggal</label>
+                        <input type="date" name="date_from" value="{{ request('date_from') }}" class="w-full px-3 py-2 bg-surface-900 border border-white/10 rounded-lg text-white text-sm focus:border-primary-500 focus:ring-1 focus:outline-none [color-scheme:dark]">
+                    </div>
+                    <div class="w-full md:w-40">
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Sampai Tanggal</label>
+                        <input type="date" name="date_to" value="{{ request('date_to') }}" class="w-full px-3 py-2 bg-surface-900 border border-white/10 rounded-lg text-white text-sm focus:border-primary-500 focus:ring-1 focus:outline-none [color-scheme:dark]">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button type="submit" class="px-5 py-2 gradient-primary rounded-lg font-medium text-sm hover:opacity-90 transition-all shadow-lg shadow-primary-500/25">
+                            Filter
+                        </button>
+                        @if(request()->hasAny(['search', 'status', 'date_from', 'date_to']))
+                            <a href="{{ route('receipts.index') }}" class="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 hover:bg-white/10 transition-all">
+                                Reset
+                            </a>
+                        @endif
+                    </div>
+                </form>
+            </div>
+            
             <div class="glass rounded-2xl overflow-hidden">
                 @if($receipts->count() > 0)
                     <div class="overflow-x-auto">
@@ -73,9 +110,13 @@
                                                         Simpan Struk
                                                     </a>
                                                 @else
+                                                    <a href="{{ route('receipts.export-single.pdf', $receipt) }}" target="_blank" class="px-3 py-1.5 text-emerald-400 hover:text-white hover:bg-emerald-500/20 rounded-lg transition-all flex items-center gap-1.5 text-xs font-medium border border-transparent hover:border-emerald-500/20" title="Cetak Struk">
+                                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                                                        Cetak
+                                                    </a>
                                                     <a href="{{ route('receipts.edit', $receipt) }}" class="px-3 py-1.5 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all flex items-center gap-1.5 text-xs font-medium border border-transparent hover:border-white/10" title="Edit Struk">
                                                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/></svg>
-                                                        Edit Struk
+                                                        Edit
                                                     </a>
                                                 @endif
                                                 <form action="{{ route('receipts.destroy', $receipt) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus struk ini?');">
@@ -101,12 +142,20 @@
                         <div class="w-16 h-16 mx-auto rounded-2xl bg-white/5 flex items-center justify-center mb-4">
                             <svg class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                         </div>
-                        <h3 class="text-lg font-medium text-white mb-2">Belum ada riwayat</h3>
-                        <p class="text-sm text-gray-400 mb-6">Anda belum mencatat pengeluaran apapun.</p>
-                        <a href="{{ route('receipts.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-sm font-medium transition-colors">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-                            Catat Pengeluaran Pertama
-                        </a>
+                        @if(request()->hasAny(['search', 'status', 'date_from', 'date_to']))
+                            <h3 class="text-lg font-medium text-white mb-2">Tidak ada hasil</h3>
+                            <p class="text-sm text-gray-400 mb-6">Tidak ditemukan struk yang sesuai dengan filter Anda.</p>
+                            <a href="{{ route('receipts.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-sm font-medium transition-colors">
+                                Reset Filter
+                            </a>
+                        @else
+                            <h3 class="text-lg font-medium text-white mb-2">Belum ada riwayat</h3>
+                            <p class="text-sm text-gray-400 mb-6">Anda belum mencatat pengeluaran apapun.</p>
+                            <a href="{{ route('receipts.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-sm font-medium transition-colors">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                                Catat Pengeluaran Pertama
+                            </a>
+                        @endif
                     </div>
                 @endif
             </div>

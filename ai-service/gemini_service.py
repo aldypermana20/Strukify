@@ -21,66 +21,73 @@ def process_receipt_with_gemini(image_bytes: bytes, mime_type: str = "image/jpeg
     model = genai.GenerativeModel('gemini-flash-latest')
 
     prompt = """
-    Analyze this receipt image and extract the following information in strict JSON format. 
+    Analyze this receipt image and extract the following information in strict JSON format.
     Only return the JSON object, nothing else. Do not use markdown blocks like ```json ... ```.
-    
+
     Format required:
     {
-        "store_name": "String (Name of the store, default empty string)",
+        "store_name": "String (Name of the store/company, default empty string)",
         "receipt_date": "String (Date of receipt in YYYY-MM-DD format, default empty string)",
-        "total": "Float (Total amount paid, default 0.0)",
+        "address": "String (Complete physical address of the store, default empty string)",
+        "total": "Float (Grand total amount paid after all discounts, default 0.0)",
         "items": [
             {
-                "item_name": "String (Name of the item)",
-                "price": "Float (Total price for this item row)",
-                "quantity": "Integer (Quantity of this item, default 1)",
-                "category_id": "Integer (Guess category ID based on the item name using the rules below)"
+                "item_name": "String (Name of the item/product)",
+                "quantity": "Integer (Quantity purchased, default 1)",
+                "price": "Float (Net price for this item after any discount, default 0.0)"
             }
         ]
     }
-    
-    Category Rules:
-    1 = Makanan & Minuman (Food & Drinks)
-    2 = Kebutuhan Rumah (Household Needs like soap, tissue)
-    3 = Elektronik (Electronics)
-    4 = Pakaian (Clothes)
-    5 = Kesehatan (Health, medicine)
-    6 = Transportasi (Transport, gas, parking)
-    7 = Lainnya (Others, use this if it doesn't fit 1-6)
-    
-    Notes:
-    - Extract ONLY the actual items purchased. Do NOT extract taxes, subtotals, change, cash, receipt numbers, dates, or card details as items.
-    - If quantity is mentioned in the item name (e.g., '2 Ham Cheese'), extract 2 as quantity and 'Ham Cheese' as item_name.
-    - Prices should be numbers without currency symbols or commas (e.g., 74000.0 instead of 74,000).
+
+    IMPORTANT RULES:
+    1. DATE FORMAT: This receipt is from Indonesia. If the date appears as DD-MM-YY or DD-MM-YYYY, treat it as Day-Month-Year (e.g., "10-06-26" means June 10, 2026, output as "2026-06-10"). NEVER swap the day and year.
+    2. ITEMS: Extract every product/item line on the receipt into the "items" array. If a line labeled "HEMAT" or discount appears after an item, subtract that discount from the item's price to get the net price. Do NOT include discount/HEMAT lines as separate items.
+    3. TOTAL: Use the grand total printed on the receipt (labeled TOTAL, JUMLAH, or similar). This should already reflect all discounts.
+    4. PRICES: All prices/totals must be plain numbers without currency symbols or commas (e.g., 63890.0 not Rp 63,890).
+    5. If any field is not found, use the default value specified above. If no items are found, return an empty array [].
     """
+    
+    import time
     
     image_parts = {
         "mime_type": mime_type,
         "data": image_bytes
     }
     
-    try:
-        response = model.generate_content([prompt, image_parts])
-        
-        # Parse the JSON from the response text
-        raw_text = response.text.strip()
-        # Clean up any potential markdown formatting the AI might still add
-        if raw_text.startswith('```json'):
-            raw_text = raw_text[7:]
-        if raw_text.startswith('```'):
-            raw_text = raw_text[3:]
-        if raw_text.endswith('```'):
-            raw_text = raw_text[:-3]
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = model.generate_content([prompt, image_parts])
             
-        return json.loads(raw_text.strip())
-        
-    except Exception as e:
-        print(f"Gemini API Error: {e}")
-        # Return fallback structure so the frontend doesn't crash completely
-        return {
-            "store_name": "",
-            "receipt_date": "",
-            "total": 0.0,
-            "items": [],
-            "error": str(e)
-        }
+            # Parse the JSON from the response text
+            raw_text = response.text.strip()
+            # Clean up any potential markdown formatting the AI might still add
+            if raw_text.startswith('```json'):
+                raw_text = raw_text[7:]
+            if raw_text.startswith('```'):
+                raw_text = raw_text[3:]
+            if raw_text.endswith('```'):
+                raw_text = raw_text[:-3]
+                
+            return json.loads(raw_text.strip())
+            
+        except Exception as e:
+            error_str = str(e)
+            print(f"Gemini API Error (Attempt {attempt+1}/{max_retries}): {error_str}")
+            
+            # Jika terkena rate limit (429 / ResourceExhausted), tunggu sebentar lalu coba lagi
+            if "429" in error_str or "ResourceExhausted" in error_str or "quota" in error_str.lower():
+                if attempt < max_retries - 1:
+                    print("Terkena rate limit, menunggu 20 detik sebelum mencoba lagi...")
+                    time.sleep(20)
+                    continue
+            
+            # Jika bukan rate limit atau sudah maksimal retry, kembalikan fallback
+            return {
+                "store_name": "",
+                "receipt_date": "",
+                "address": "",
+                "total": 0.0,
+                "items": [],
+                "error": error_str
+            }

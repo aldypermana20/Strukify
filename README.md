@@ -8,12 +8,12 @@
 **Tim Pengembang Strukify**
 
 <div align='center'>
-<img src="assets/images/Aldy.png" width="100" style="border-radius:50%"/>
-<img src="assets/images/Andy.png" width="100" style="border-radius:50%"/>
-<img src="assets/images/Dapoy.png" width="100" style="border-radius:50%"/>
-<img src="assets/images/Dimas.png" width="100" style="border-radius:50%"/>
+<img src="public/assets/images/Aldy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/assets/images/Andy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/assets/images/Dapoy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/assets/images/Dimas.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
 
-<br>
+<br><br>
 
 [![1237050003](https://img.shields.io/badge/003-Aldy%20Permana-blue)](https://github.com/aldypermana20) 
 [![1237050041](https://img.shields.io/badge/041-Andi%20Muchamad%20Mugni%20P-blue)](https://github.com/Andimugni27) 
@@ -144,6 +144,59 @@ pip install -r requirements.txt
 # Jalankan server FastAPI
 python main.py
 ```
+
+---
+
+# 5. Metodologi Pengembangan (SCRUM)
+![Methodology](https://img.shields.io/badge/Method-Agile%20SCRUM-blue)
+
+Proyek ini dikembangkan dengan pendekatan *Agile Development* menggunakan framework **SCRUM**. Pendekatan ini memungkinkan kami untuk mengembangkan fitur secara iteratif, fleksibel terhadap perubahan, dan berfokus pada pengiriman produk yang fungsional di setiap fasenya.
+
+### Peran Tim (Scrum Roles)
+- **Product Owner:** Menentukan kebutuhan sistem dan prioritas backlog.
+- **Scrum Master:** Memfasilitasi proses SCRUM dan menghilangkan hambatan.
+- **Development Team:** Mengembangkan aplikasi (Frontend, Backend, AI).
+
+### Alur Pengembangan (Sprints)
+Pengembangan dibagi menjadi beberapa siklus *Sprint* (durasi 1-2 minggu), di mana setiap Sprint menghasilkan *Increment* atau fitur yang siap digunakan:
+
+* **Sprint 1: Core Foundation & Auth** 
+  - Setup arsitektur aplikasi (Laravel & FastAPI).
+  - Implementasi autentikasi pengguna (Login/Register).
+  - Pembuatan UI/UX dasar dan Dashboard awal.
+* **Sprint 2: AI Microservice & OCR Integration**
+  - Pengembangan model EasyOCR di FastAPI.
+  - Integrasi komunikasi API antara Laravel dan FastAPI.
+  - Fitur upload gambar struk dan ekstraksi teks kasar (*Raw Text*).
+* **Sprint 3: Auto Categorization & Smart Checkout**
+  - Pemrosesan regex untuk menangkap nama item, harga, dan total.
+  - Sistem klasifikasi kategori.
+  - Antarmuka reaktif menggunakan Alpine.js untuk verifikasi hasil scan.
+* **Sprint 4: Reporting & Finalization**
+  - Pembuatan visualisasi data pengeluaran dengan Chart.js.
+  - Ekspor laporan bulanan ke format PDF.
+  - *Bug fixing*, optimasi performa, dan penyusunan dokumentasi/laporan akhir.
+
+---
+
+# 6. Bukti Testing (Testing Evidence)
+![Testing](https://img.shields.io/badge/Testing-Evidence-purple)
+
+Bagian ini berisi dokumentasi hasil pengujian sistem beserta bukti *screenshot*-nya.
+
+| No | Fitur / Skenario Pengujian | Hasil yang Diharapkan | Status | Bukti Screenshot |
+|---|---|---|:---:|---|
+| 1 | Landing Page | Halaman utama berhasil dimuat dengan baik dan menampilkan informasi aplikasi secara responsif. | ✅ Pass | <img src="public/images/Landing Page.png" width="200"> |
+| 2 | Register | Pengguna baru berhasil mendaftar akun dengan data yang valid dan diarahkan ke halaman login. | ✅ Pass | <img src="public/images/Register.png" width="200"> |
+| 3 | Login | Pengguna berhasil masuk ke sistem dengan kredensial yang valid dan diarahkan ke halaman Dashboard. | ✅ Pass | <img src="public/images/Login.png" width="200"> |
+| 4 | Dashboard | Menampilkan ringkasan data pengeluaran dan grafik analitik secara akurat berdasarkan data akun. | ✅ Pass | <img src="public/images/Dashboard.png" width="200"> |
+| 5 | Scan Struk | Sistem berhasil menerima unggahan foto struk pengguna dan menampilkannya dengan baik. | ✅ Pass | <img src="public/images/Scan Struk.png" width="200"> |
+| 6 | Ai Proses | Model AI berhasil mengekstrak teks, mendeteksi item/harga, dan mengkategorikannya secara otomatis. | ✅ Pass | <img src="public/images/Ai Proses.png" width="200"> |
+| 7 | Riwayat Struk 1 | Menampilkan daftar riwayat struk yang telah dipindai secara berurutan beserta tanggal dan totalnya. | ✅ Pass | <img src="public/images/Riwayat Struk.png" width="200"> |
+| 8 | Riwayat Struk 2 | Menampilkan detail lengkap (item, harga, kategori) dari salah satu struk belanja yang tersimpan. | ✅ Pass | <img src="public/images/Riwayat Struk 2.png" width="200"> |
+| 9 | Riwayat Struk 3 | Fungsionalitas manajemen riwayat struk (misal: pencarian, filter, atau hapus) berjalan dengan lancar. | ✅ Pass | <img src="public/images/Riwayat Struk 3.png" width="200"> |
+| 10 | Simpan Struk | Data struk belanja yang telah di-*review* berhasil disimpan secara permanen ke dalam database. | ✅ Pass | <img src="public/images/Simpan Struk.png" width="200"> |
+| 11 | Laporan | Sistem berhasil merangkum total pengeluaran dan menampilkannya sebagai laporan/rekapitulasi yang valid. | ✅ Pass | <img src="public/images/Laporan.png" width="200"> |
 
 ---
 

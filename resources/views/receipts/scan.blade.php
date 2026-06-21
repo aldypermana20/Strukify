@@ -1,5 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
+        <x-breadcrumb :items="[
+            ['label' => 'Dashboard', 'url' => route('dashboard')],
+            ['label' => 'Scan Struk'],
+        ]" />
         <h2 class="text-xl font-bold font-display text-white">
             Scan Struk Belanja
         </h2>
