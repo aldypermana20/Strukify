@@ -8,17 +8,19 @@
 **Tim Pengembang Strukify**
 
 <div align='center'>
-<img src="public/assets/images/Aldy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
-<img src="public/assets/images/Andy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
-<img src="public/assets/images/Dapoy.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
-<img src="public/assets/images/Dimas.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/images/Desain tanpa judul (3).png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/images/Screenshot 2026-06-02 174210.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/images/Screenshot 2026-06-02 174156.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
+<img src="public/images/Screenshot 2026-06-02 174119.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
 
 <br><br>
 
 [![1237050003](https://img.shields.io/badge/003-Aldy%20Permana-blue)](https://github.com/aldypermana20) 
-[![1237050041](https://img.shields.io/badge/041-Andi%20Muchamad%20Mugni%20P-blue)](https://github.com/Andimugni27) 
-[![1237050069](https://img.shields.io/badge/069-Dhaffa%20Zikrullah%20Ramadhan-blue)](https://github.com/dazidhan) 
-[![1237050073](https://img.shields.io/badge/073-Dimas%20Rizqia%20Hidayat-blue)](https://github.com/dimaswae)
+[![1237050041](https://img.shields.io/badge/nim-Aditya%20Nurul%20Pratama-blue)](https://github.com/) 
+[![1237050069](https://img.shields.io/badge/nim-Annisa%20Rasha%20Azaliyya-blue)](https://github.com/) 
+[![1237050073](https://img.shields.io/badge/nim-Andhika%20Pratama%20Kurniawan-blue)](https://github.com/)
+[![1237050073](https://img.shields.io/badge/nim-Aura%20Ghifarani-blue)](https://github.com/)
+[![1237050073](https://img.shields.io/badge/nim-Fauzi%20rizki-blue)](https://github.com/)
 
 <br>
 
@@ -146,6 +148,8 @@ python main.py
 ```
 
 ---
+# 6. Bukti Testing (Testing Evidence)
+![Testing](https://img.shields.io/badge/Testing-Evidence-purple)
 
 # 5. Metodologi Pengembangan (SCRUM)
 ![Methodology](https://img.shields.io/badge/Method-Agile%20SCRUM-blue)
@@ -197,9 +201,7 @@ Bagian ini berisi dokumentasi hasil pengujian sistem beserta bukti *screenshot*-
 | 9 | Riwayat Struk 3 | Fungsionalitas manajemen riwayat struk (misal: pencarian, filter, atau hapus) berjalan dengan lancar. | ✅ Pass | <img src="public/images/Riwayat Struk 3.png" width="200"> |
 | 10 | Simpan Struk | Data struk belanja yang telah di-*review* berhasil disimpan secara permanen ke dalam database. | ✅ Pass | <img src="public/images/Simpan Struk.png" width="200"> |
 | 11 | Laporan | Sistem berhasil merangkum total pengeluaran dan menampilkannya sebagai laporan/rekapitulasi yang valid. | ✅ Pass | <img src="public/images/Laporan.png" width="200"> |
-
 ---
-
 <div align='center'>
 <small>Made with ❤️ by Team Strukify | UIN Sunan Gunung Djati Bandung</small>
 </div>
