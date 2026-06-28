@@ -8,11 +8,6 @@
 **Tim Pengembang Strukify**
 
 <div align='center'>
-<img src="public/images/Desain tanpa judul (3).png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
-<img src="public/images/Screenshot 2026-06-02 174210.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
-<img src="public/images/Screenshot 2026-06-02 174156.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
-<img src="public/images/Screenshot 2026-06-02 174119.png" width="120" height="120" style="border-radius:50%; border: 4px solid #00bfa5; object-fit: cover; margin: 0 10px;"/>
-
 <br><br>
 
 [![1237050003](https://img.shields.io/badge/003-Aldy%20Permana-blue)](https://github.com/aldypermana20) 
@@ -184,21 +179,7 @@ Pengembangan dibagi menjadi beberapa siklus *Sprint* (durasi 1-2 minggu), di man
 ![Testing](https://img.shields.io/badge/Testing-Evidence-purple)
 
 Bagian ini berisi dokumentasi hasil pengujian sistem beserta bukti *screenshot*-nya.
-
-| No | Fitur / Skenario Pengujian | Hasil yang Diharapkan | Status | Bukti Screenshot |
-|---|---|---|:---:|---|
-| 1 | Landing Page | Halaman utama berhasil dimuat dengan baik dan menampilkan informasi aplikasi secara responsif. | ✅ Pass | <img src="public/images/Landing Page.png" width="200"> |
-| 2 | Register | Pengguna baru berhasil mendaftar akun dengan data yang valid dan diarahkan ke halaman login. | ✅ Pass | <img src="public/images/Register.png" width="200"> |
-| 3 | Login | Pengguna berhasil masuk ke sistem dengan kredensial yang valid dan diarahkan ke halaman Dashboard. | ✅ Pass | <img src="public/images/Login.png" width="200"> |
-| 4 | Dashboard | Menampilkan ringkasan data pengeluaran dan grafik analitik secara akurat berdasarkan data akun. | ✅ Pass | <img src="public/images/Dashboard.png" width="200"> |
-| 5 | Scan Struk | Sistem berhasil menerima unggahan foto struk pengguna dan menampilkannya dengan baik. | ✅ Pass | <img src="public/images/Scan Struk.png" width="200"> |
-| 6 | Ai Proses | Model AI berhasil mengekstrak teks, mendeteksi item/harga, dan mengkategorikannya secara otomatis. | ✅ Pass | <img src="public/images/Ai Proses.png" width="200"> |
-| 7 | Riwayat Struk 1 | Menampilkan daftar riwayat struk yang telah dipindai secara berurutan beserta tanggal dan totalnya. | ✅ Pass | <img src="public/images/Riwayat Struk.png" width="200"> |
-| 8 | Riwayat Struk 2 | Menampilkan detail lengkap (item, harga, kategori) dari salah satu struk belanja yang tersimpan. | ✅ Pass | <img src="public/images/Riwayat Struk 2.png" width="200"> |
-| 9 | Riwayat Struk 3 | Fungsionalitas manajemen riwayat struk (misal: pencarian, filter, atau hapus) berjalan dengan lancar. | ✅ Pass | <img src="public/images/Riwayat Struk 3.png" width="200"> |
-| 10 | Simpan Struk | Data struk belanja yang telah di-*review* berhasil disimpan secara permanen ke dalam database. | ✅ Pass | <img src="public/images/Simpan Struk.png" width="200"> |
-| 11 | Laporan | Sistem berhasil merangkum total pengeluaran dan menampilkannya sebagai laporan/rekapitulasi yang valid. | ✅ Pass | <img src="public/images/Laporan.png" width="200"> |
-| 12 | Akurasi Ekstraksi AI | Model Gemini 2.5 Flash berhasil mendeteksi dan mengekstrak nama toko, daftar barang, qty, dan harga net dengan sangat akurat. | ✅ Pass | <img src="public/images/Akurasi AI.png" width="200"> |
+https://drive.google.com/drive/folders/18lIaVW_vtehoiB6pK7e_Y_phWzgRcMjl?usp=sharing
 ---
 <div align='center'>
 <small>Dibuat Oleh Team Strukify | UIN Sunan Gunung Djati Bandung</small>
