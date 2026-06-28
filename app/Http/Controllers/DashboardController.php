@@ -41,49 +41,40 @@ class DashboardController extends Controller
             // 3. Calculate average spending per receipt
             $avgSpending = $totalReceipts > 0 ? $totalSpending / $totalReceipts : 0;
 
-            // 4. Build spending trend data for line chart
-            $trendLabels = [];
-            $trendData = [];
+            // 4. Build spending category data for donut chart
+            $categoryStatsQuery = DB::table('receipt_items')
+                ->join('receipts', 'receipt_items.receipt_id', '=', 'receipts.id')
+                ->leftJoin('categories', 'receipt_items.category_id', '=', 'categories.id')
+                ->where('receipts.user_id', $user->id)
+                ->where('receipts.status', 'saved');
 
             if ($period === 'today') {
-                // Show last 7 days
-                for ($i = 6; $i >= 0; $i--) {
-                    $date = Carbon::today()->subDays($i);
-                    $trendLabels[] = $date->format('d M');
-                    $trendData[] = (float) $user->receipts()
-                        ->where('status', 'saved')
-                        ->whereDate('receipt_date', $date)
-                        ->sum('total');
-                }
+                $categoryStatsQuery->whereDate('receipts.receipt_date', Carbon::today());
             } elseif ($period === 'month') {
-                // Show each day of this month up to today
-                $start = Carbon::now()->startOfMonth();
-                $end = Carbon::now();
-                for ($date = $start->copy(); $date->lte($end); $date->addDay()) {
-                    $trendLabels[] = $date->format('d');
-                    $trendData[] = (float) $user->receipts()
-                        ->where('status', 'saved')
-                        ->whereDate('receipt_date', $date)
-                        ->sum('total');
-                }
+                $categoryStatsQuery->whereMonth('receipts.receipt_date', Carbon::now()->month)
+                              ->whereYear('receipts.receipt_date', Carbon::now()->year);
             } elseif ($period === 'year') {
-                // Show each month of this year
-                for ($m = 1; $m <= 12; $m++) {
-                    $trendLabels[] = Carbon::create(null, $m, 1)->format('M');
-                    $trendData[] = (float) $user->receipts()
-                        ->where('status', 'saved')
-                        ->whereMonth('receipt_date', $m)
-                        ->whereYear('receipt_date', Carbon::now()->year)
-                        ->sum('total');
-                }
+                $categoryStatsQuery->whereYear('receipts.receipt_date', Carbon::now()->year);
             }
+
+            $categoryStats = $categoryStatsQuery->selectRaw('COALESCE(categories.name, "Lainnya") as name, SUM(receipt_items.quantity * receipt_items.price) as total')
+                ->groupByRaw('COALESCE(categories.name, "Lainnya")')
+                ->orderByDesc('total')
+                ->get();
+
+            $categoryLabels = $categoryStats->pluck('name')->toArray();
+            $categoryData = $categoryStats->pluck('total')->map(fn($v) => (float)$v)->toArray();
+
+            $topCategory = $categoryStats->first();
+            $topCategoryName = $topCategory ? $topCategory->name : '-';
 
             return [
                 'totalSpending' => $totalSpending,
                 'totalReceipts' => $totalReceipts,
                 'avgSpending' => $avgSpending,
-                'trendLabels' => $trendLabels,
-                'trendData' => $trendData
+                'categoryLabels' => $categoryLabels,
+                'categoryData' => $categoryData,
+                'topCategoryName' => $topCategoryName
             ];
         });
 

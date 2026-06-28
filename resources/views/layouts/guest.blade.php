@@ -10,23 +10,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-surface-900 text-white">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 gradient-hero relative">
-        <!-- Ambient orbs -->
-        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-60 h-60 bg-cyan-500/8 rounded-full blur-3xl"></div>
-
-        <div class="relative z-10">
-            <a href="/" class="flex items-center gap-2.5 mb-8 justify-center group">
-                <div class="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center shadow-lg shadow-primary-500/20 group-hover:shadow-primary-500/40 transition-shadow">
-                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+<body class="font-sans antialiased bg-[#e6f4f1] text-surface-900">
+    <div class="min-h-screen flex items-center justify-center p-4 sm:p-8">
+        
+        <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden min-h-[500px]">
+            <!-- Left side (Form) -->
+            <div class="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center bg-white relative">
+                <div class="w-full max-w-sm mx-auto">
+                    <div class="flex justify-start mb-8">
+                        <a href="/" class="flex items-center gap-2 group">
+                            <div class="w-8 h-8 rounded-lg bg-[#109479] flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold font-display text-sm">S</span>
+                            </div>
+                            <span class="text-xl font-bold font-display tracking-tight text-[#109479]">Strukify</span>
+                        </a>
+                    </div>
+                    
+                    {{ $slot }}
                 </div>
-                <span class="text-2xl font-bold font-display tracking-tight">Struk<span class="gradient-text">ify</span></span>
-            </a>
-        </div>
+            </div>
 
-        <div class="w-full sm:max-w-md px-6 py-8 glass rounded-2xl shadow-2xl relative z-10">
-            {{ $slot }}
+            <!-- Right side (Illustration/Branding) -->
+            <div class="w-full md:w-1/2 p-12 bg-[#109479] hidden md:flex flex-col items-center justify-center text-center">
+                <div class="w-40 h-40 rounded-full bg-white/10 flex items-center justify-center mb-8 shadow-inner border border-white/20">
+                    <div class="w-24 h-24 rounded-full border-4 border-white flex items-center justify-center relative">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-white font-display mb-4">Catat Pengeluaran Mudah & Cepat 💸</h3>
+                <p class="text-white/80 text-sm leading-relaxed max-w-xs mx-auto">
+                    Foto struk belanjamu kapan saja. Cek riwayat, analitik, dan kelola keuangan. Semua dalam satu aplikasi!
+                </p>
+            </div>
         </div>
     </div>
 </body>

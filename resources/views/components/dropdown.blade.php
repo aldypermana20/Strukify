@@ -2,9 +2,11 @@
 
 @php
 $alignmentClasses = match ($align) {
-    'left' => 'ltr:origin-top-left rtl:origin-top-right start-0',
-    'top' => 'origin-top',
-    default => 'ltr:origin-top-right rtl:origin-top-left end-0',
+    'left' => 'ltr:origin-top-left rtl:origin-top-right start-0 mt-2',
+    'top' => 'origin-top mt-2',
+    'top-right' => 'origin-bottom-right end-0 bottom-full mb-2',
+    'top-left' => 'origin-bottom-left start-0 bottom-full mb-2',
+    default => 'ltr:origin-top-right rtl:origin-top-left end-0 mt-2',
 };
 
 $width = match ($width) {
@@ -25,7 +27,7 @@ $width = match ($width) {
             x-transition:leave="transition ease-in duration-75"
             x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-0 scale-95"
-            class="absolute z-50 mt-2 {{ $width }} rounded-xl shadow-2xl {{ $alignmentClasses }}"
+            class="absolute z-50 {{ $width }} rounded-xl shadow-2xl {{ $alignmentClasses }}"
             style="display: none;"
             @click="open = false">
         <div class="rounded-xl {{ $contentClasses }}">

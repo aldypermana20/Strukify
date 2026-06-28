@@ -40,7 +40,7 @@ class ProcessReceiptScan implements ShouldQueue
             }
 
             // Send to FastAPI Service
-            $response = Http::timeout(60)
+            $response = Http::timeout(120)
                 ->attach('image', file_get_contents($imagePath), basename($imagePath))
                 ->post('http://127.0.0.1:8001/api/scan');
 

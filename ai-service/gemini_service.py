@@ -17,8 +17,8 @@ def process_receipt_with_gemini(image_bytes: bytes, mime_type: str = "image/jpeg
         
     genai.configure(api_key=current_api_key)
     
-    # We use gemini-flash-latest as it is extremely fast and capable for multimodal tasks
-    model = genai.GenerativeModel('gemini-flash-latest')
+    # We use gemini-2.5-flash as it is extremely fast and capable for multimodal tasks
+    model = genai.GenerativeModel('gemini-2.5-flash')
 
     prompt = """
     Analyze this receipt image and extract the following information in strict JSON format.
@@ -54,40 +54,36 @@ def process_receipt_with_gemini(image_bytes: bytes, mime_type: str = "image/jpeg
         "data": image_bytes
     }
     
-    max_retries = 3
-    for attempt in range(max_retries):
-        try:
-            response = model.generate_content([prompt, image_parts])
+    image_parts = {
+        "mime_type": mime_type,
+        "data": image_bytes
+    }
+    
+    try:
+        response = model.generate_content([prompt, image_parts])
+        
+        # Parse the JSON from the response text
+        raw_text = response.text.strip()
+        # Clean up any potential markdown formatting the AI might still add
+        if raw_text.startswith('```json'):
+            raw_text = raw_text[7:]
+        if raw_text.startswith('```'):
+            raw_text = raw_text[3:]
+        if raw_text.endswith('```'):
+            raw_text = raw_text[:-3]
             
-            # Parse the JSON from the response text
-            raw_text = response.text.strip()
-            # Clean up any potential markdown formatting the AI might still add
-            if raw_text.startswith('```json'):
-                raw_text = raw_text[7:]
-            if raw_text.startswith('```'):
-                raw_text = raw_text[3:]
-            if raw_text.endswith('```'):
-                raw_text = raw_text[:-3]
-                
-            return json.loads(raw_text.strip())
-            
-        except Exception as e:
-            error_str = str(e)
-            print(f"Gemini API Error (Attempt {attempt+1}/{max_retries}): {error_str}")
-            
-            # Jika terkena rate limit (429 / ResourceExhausted), tunggu sebentar lalu coba lagi
-            if "429" in error_str or "ResourceExhausted" in error_str or "quota" in error_str.lower():
-                if attempt < max_retries - 1:
-                    print("Terkena rate limit, menunggu 20 detik sebelum mencoba lagi...")
-                    time.sleep(20)
-                    continue
-            
-            # Jika bukan rate limit atau sudah maksimal retry, kembalikan fallback
-            return {
-                "store_name": "",
-                "receipt_date": "",
-                "address": "",
-                "total": 0.0,
-                "items": [],
-                "error": error_str
-            }
+        return json.loads(raw_text.strip())
+        
+    except Exception as e:
+        error_str = str(e)
+        print(f"Gemini API Error: {error_str}")
+        
+        # Kembalikan fallback ke frontend dengan menyertakan pesan error agar terlihat
+        return {
+            "store_name": "",
+            "receipt_date": "",
+            "address": "",
+            "total": 0.0,
+            "items": [],
+            "error": error_str
+        }

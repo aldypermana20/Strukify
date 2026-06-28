@@ -148,9 +148,6 @@ python main.py
 ```
 
 ---
-# 6. Bukti Testing (Testing Evidence)
-![Testing](https://img.shields.io/badge/Testing-Evidence-purple)
-
 # 5. Metodologi Pengembangan (SCRUM)
 ![Methodology](https://img.shields.io/badge/Method-Agile%20SCRUM-blue)
 
@@ -201,7 +198,8 @@ Bagian ini berisi dokumentasi hasil pengujian sistem beserta bukti *screenshot*-
 | 9 | Riwayat Struk 3 | Fungsionalitas manajemen riwayat struk (misal: pencarian, filter, atau hapus) berjalan dengan lancar. | ✅ Pass | <img src="public/images/Riwayat Struk 3.png" width="200"> |
 | 10 | Simpan Struk | Data struk belanja yang telah di-*review* berhasil disimpan secara permanen ke dalam database. | ✅ Pass | <img src="public/images/Simpan Struk.png" width="200"> |
 | 11 | Laporan | Sistem berhasil merangkum total pengeluaran dan menampilkannya sebagai laporan/rekapitulasi yang valid. | ✅ Pass | <img src="public/images/Laporan.png" width="200"> |
+| 12 | Akurasi Ekstraksi AI | Model Gemini 2.5 Flash berhasil mendeteksi dan mengekstrak nama toko, daftar barang, qty, dan harga net dengan sangat akurat. | ✅ Pass | <img src="public/images/Akurasi AI.png" width="200"> |
 ---
 <div align='center'>
-<small>Made with ❤️ by Team Strukify | UIN Sunan Gunung Djati Bandung</small>
+<small>Dibuat Oleh Team Strukify | UIN Sunan Gunung Djati Bandung</small>
 </div>

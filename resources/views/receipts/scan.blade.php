@@ -4,7 +4,7 @@
             ['label' => 'Dashboard', 'url' => route('dashboard')],
             ['label' => 'Scan Struk'],
         ]" />
-        <h2 class="text-xl font-bold font-display text-white">
+        <h2 class="text-xl font-bold font-display text-slate-800">
             Scan Struk Belanja
         </h2>
     </x-slot>
@@ -22,13 +22,13 @@
                 </div>
             @endif
 
-            <div class="glass rounded-2xl p-8" x-data="imageUploader()">
+            <div class="glass-light rounded-2xl p-8" x-data="imageUploader()">
                 <div class="text-center mb-8">
                     <div class="w-16 h-16 mx-auto rounded-2xl gradient-primary flex items-center justify-center mb-4 shadow-lg shadow-primary-500/20">
                         <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"/></svg>
                     </div>
                     <h3 class="text-2xl font-bold font-display mb-2">Upload Struk Anda</h3>
-                    <p class="text-gray-400">AI kami akan membaca dan mengkategorikan pengeluaran secara otomatis.</p>
+                    <p class="text-slate-500">AI kami akan membaca dan mengkategorikan pengeluaran secara otomatis.</p>
                 </div>
 
                 <form action="{{ route('scan.process') }}" method="POST" enctype="multipart/form-data" id="scanForm">
@@ -42,22 +42,22 @@
                         
                         <input type="file" name="receipt_image" x-ref="fileInput" class="hidden" accept="image/*" @change="handleFileSelect">
                         
-                        <div :class="{'border-primary-500 bg-primary-500/5': dragover, 'border-white/20 bg-white/5 group-hover:border-primary-500/50 group-hover:bg-white/10': !dragover}"
+                        <div :class="{'border-primary-500 bg-primary-500/5': dragover, 'border-white/20 bg-slate-50 group-hover:border-primary-500/50 group-hover:bg-slate-200': !dragover}"
                              class="border-2 border-dashed rounded-2xl p-10 transition-all text-center">
                             
                             <template x-if="!imageUrl">
                                 <div>
-                                    <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
-                                    <p class="text-sm font-medium text-white mb-1">Klik untuk upload atau drag and drop</p>
-                                    <p class="text-xs text-gray-500">PNG, JPG, JPEG (Maks. 10MB)</p>
+                                    <svg class="mx-auto h-12 w-12 text-slate-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+                                    <p class="text-sm font-medium text-slate-800 mb-1">Klik untuk upload atau drag and drop</p>
+                                    <p class="text-xs text-slate-400">PNG, JPG, JPEG (Maks. 10MB)</p>
                                 </div>
                             </template>
 
                             <template x-if="imageUrl">
                                 <div class="relative w-full max-w-sm mx-auto">
-                                    <img :src="imageUrl" class="w-full h-auto rounded-lg shadow-lg border border-white/10">
+                                    <img :src="imageUrl" class="w-full h-auto rounded-lg shadow-lg border border-slate-200">
                                     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
-                                        <p class="text-sm font-medium text-white">Ganti Gambar</p>
+                                        <p class="text-sm font-medium text-slate-800">Ganti Gambar</p>
                                     </div>
                                 </div>
                             </template>
@@ -79,16 +79,16 @@
             
             <div class="mt-8 grid grid-cols-3 gap-6 text-center opacity-70">
                 <div>
-                    <div class="text-primary-400 font-bold mb-1">Pencahayaan</div>
-                    <div class="text-xs text-gray-400">Pastikan struk terang dan jelas</div>
+                    <div class="text-primary-600 font-bold mb-1">Pencahayaan</div>
+                    <div class="text-xs text-slate-500">Pastikan struk terang dan jelas</div>
                 </div>
                 <div>
-                    <div class="text-primary-400 font-bold mb-1">Rata</div>
-                    <div class="text-xs text-gray-400">Ratakan lipatan pada struk</div>
+                    <div class="text-primary-600 font-bold mb-1">Rata</div>
+                    <div class="text-xs text-slate-500">Ratakan lipatan pada struk</div>
                 </div>
                 <div>
-                    <div class="text-primary-400 font-bold mb-1">Fokus</div>
-                    <div class="text-xs text-gray-400">Hindari foto blur/goyang</div>
+                    <div class="text-primary-600 font-bold mb-1">Fokus</div>
+                    <div class="text-xs text-slate-500">Hindari foto blur/goyang</div>
                 </div>
             </div>
 
